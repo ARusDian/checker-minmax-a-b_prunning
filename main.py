@@ -1,5 +1,6 @@
 # Assets: https://techwithtim.net/wp-content/uploads/2020/09/assets.zip
 import pygame
+import time
 from checkers.constants import WIDTH, HEIGHT, SQUARE_SIZE, BLUE, WHITE, COUNT
 from checkers.game import Game
 from minimax.algorithm import minimax
@@ -25,9 +26,10 @@ def main():
         clock.tick(FPS)
         
         if game.turn == WHITE:
-            global COUNT
-            COUNT = 0
-            value, new_board = minimax(game.get_board(), 5, WHITE, game, float('-inf'), float('inf'), True)
+            start_time = time.time()
+            value, new_board = minimax(game.get_board(), 2, WHITE, game, float('-inf'), float('inf'), False)
+            end_time = time.time()
+            print("Time taken: ", end_time - start_time)
             game.ai_move(new_board)
 
         if game.winner():
